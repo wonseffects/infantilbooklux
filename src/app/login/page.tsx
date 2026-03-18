@@ -12,8 +12,9 @@ import {
 import Link from "next/link";
 import { login } from "@/app/auth/actions";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
-export default function LoginPage() {
+function LoginContent() {
     const [loading, setLoading] = useState(false);
     const searchParams = useSearchParams();
     const error = searchParams.get("error");
@@ -123,5 +124,17 @@ export default function LoginPage() {
                 </p>
             </div>
         </main>
+    );
+}
+
+export default function LoginPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen bg-[#020617] flex items-center justify-center">
+                <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+            </div>
+        }>
+            <LoginContent />
+        </Suspense>
     );
 }
