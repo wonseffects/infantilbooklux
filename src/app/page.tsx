@@ -21,48 +21,48 @@ import Image from "next/image";
 
 const landingBooks = myBooks.map(book => {
     let description = "";
-    let priceId = "price_1TBcjTD3rPb8y5wPbWMPalXW"; // default ou placeholder
+    let priceId = "price_1T9lKbD3rPb8y5wPvE6Zr6xk"; // default ou placeholder
 
     switch (book.id) {
         case "1":
             description = "Uma jornada mágica onde Luna descobre uma floresta secreta e ajuda seus novos amigos animais.";
-            priceId = "price_1T9skfD3rPb8y5wPWu982kRZ";
+            priceId = "price_1T9lKbD3rPb8y5wPvE6Zr6xk";
             break;
         case "2":
             description = "Edward explora a natureza e aprende que grandes descobertas estão nos pequenos detalhes.";
-            priceId = "price_1T9skfD3rPb8y5wPWu982kRZ";
+            priceId = "price_1T9lKbD3rPb8y5wPvE6Zr6xk";
             break;
         case "3":
             description = "Uma viagem espacial onde Leo aprende sobre as constelações e descobre a coragem dentro de si.";
-            priceId = "price_1T9skfD3rPb8y5wPWu982kRZ";
+            priceId = "price_1T9lKbD3rPb8y5wPvE6Zr6xk";
             break;
         case "4":
             description = "A adorável Família Urso mostra ao pequeno Bibo que o maior tesouro é o calor de um lar.";
-            priceId = "price_1T9skfD3rPb8y5wPWu982kRZ";
+            priceId = "price_1T9lKbD3rPb8y5wPvE6Zr6xk";
             break;
         case "5":
             description = "Tito, o guaxinim explorador, descobre que ajudar os outros é a melhor parte da aventura.";
-            priceId = "price_1T9skfD3rPb8y5wPWu982kRZ";
+            priceId = "price_1T9lKbD3rPb8y5wPvE6Zr6xk";
             break;
         case "6":
             description = "O pequeno elefante Zeca descobre como um simples abraço pode espantar a tristeza.";
-            priceId = "price_1T9skfD3rPb8y5wPWu982kRZ";
+            priceId = "price_1T9lKbD3rPb8y5wPvE6Zr6xk";
             break;
         case "7":
             description = "A encantadora história da Casa Cinco, que mudava de cor com as emoções e alegrava toda a vizinhança.";
-            priceId = "price_1T9skfD3rPb8y5wPWu982kRZ";
+            priceId = "price_1T9lKbD3rPb8y5wPvE6Zr6xk";
             break;
         case "8":
             description = "Luma, a simpática raposa, faz amizade com vagalumes e aprende a não ter medo do escuro.";
-            priceId = "price_1T9skfD3rPb8y5wPWu982kRZ";
+            priceId = "price_1T9lKbD3rPb8y5wPvE6Zr6xk";
             break;
         case "9":
             description = "A minhoca Bento e seus incríveis amigos insetos se unem para ajudar uma estrelinha caída.";
-            priceId = "price_1T9skfD3rPb8y5wPWu982kRZ";
+            priceId = "price_1T9lKbD3rPb8y5wPvE6Zr6xk";
             break;
         case "10":
             description = "A garotinha Pip ajuda o velhinho Tibo a encontrar as receitas mágicas de criar nuvens.";
-            priceId = "price_1T9skfD3rPb8y5wPWu982kRZ";
+            priceId = "price_1T9lKbD3rPb8y5wPvE6Zr6xk";
             break;
     }
 
@@ -149,7 +149,7 @@ export default function Home() {
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4">
                                 <form action={createCheckoutSession}>
-                                    <input type="hidden" name="priceId" value="price_1TBcftD3rPb8y5wPCUEX2rh8" />
+                                    <input type="hidden" name="priceId" value="price_1T9iD0D3rPb8y5wPfYmVrpwB" />
                                     <button type="submit" className="w-full relative overflow-hidden bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold py-4 px-8 rounded-2xl shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-blue-500/25 active:scale-95 text-lg">
                                         Garantir Pack Completo
                                     </button>
@@ -289,7 +289,7 @@ export default function Home() {
                                     <div className="text-6xl font-black text-blue-300 drop-shadow-xl">R$ 59,90</div>
                                 </div>
                                 <form action={createCheckoutSession}>
-                                    <input type="hidden" name="priceId" value="price_1TBcftD3rPb8y5wPCUEX2rh8" />
+                                    <input type="hidden" name="priceId" value="price_1T9iD0D3rPb8y5wPfYmVrpwB" />
                                     <input type="hidden" name="bookId" value="all" />
                                     <button type="submit" className="w-full bg-white text-blue-900 font-black text-xl py-6 rounded-2xl shadow-xl transition-all hover:scale-105 active:scale-95 mb-4">
                                         QUERO MEU PACK AGORA!
