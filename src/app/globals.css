@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --background: #f8fafc;
+    --foreground: #020617;
+}
+
+.dark {
+    --background: #020617;
+    --foreground: #f8fafc;
+}
+
+body {
+    color: var(--foreground);
+    background: var(--background);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Outfit', sans-serif;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.bg-mesh {
+    background-color: hsla(258, 0%, 0%, 1);
+    background-image:
+        radial-gradient(at 10% 20%, hsla(234, 100%, 10%, 1) 0px, transparent 50%),
+        radial-gradient(at 90% 10%, hsla(271, 100%, 15%, 1) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, hsla(258, 100%, 5%, 1) 0px, transparent 50%);
+}
