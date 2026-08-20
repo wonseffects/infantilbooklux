@@ -9,7 +9,7 @@ import {
     Chrome
 } from "lucide-react";
 import Link from "next/link";
-import { login, signInWithGoogle } from "@/app/auth/actions";
+import { login } from "@/app/auth/actions";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
@@ -103,14 +103,12 @@ function LoginContent() {
                     </div>
 
                     <div className="mt-8">
-                        <form action={signInWithGoogle}>
-                            <button
-                                type="submit"
-                                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all font-medium text-sm"
-                            >
-                                <Chrome className="w-5 h-5" /> Entrar com Google
-                            </button>
-                        </form>
+                        <a
+                            href="/auth/signin/google"
+                            className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all font-medium text-sm"
+                        >
+                            <Chrome className="w-5 h-5" /> Entrar com Google
+                        </a>
                     </div>
                 </div>
 
