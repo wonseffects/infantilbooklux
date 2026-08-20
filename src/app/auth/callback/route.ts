@@ -60,5 +60,7 @@ export async function GET(request: NextRequest) {
         }
     }
 
-    return NextResponse.redirect('http://localhost:3000/login?error=Falha+ao+autenticar+com+Google')
+    const forwardedHost = request.headers.get('x-forwarded-host')
+    const baseUrl = forwardedHost ? `https://${forwardedHost}` : `${request.nextUrl.protocol}//${request.nextUrl.host}`
+    return NextResponse.redirect(`${baseUrl}/login?error=Falha+ao+autenticar+com+Google`)
 }
