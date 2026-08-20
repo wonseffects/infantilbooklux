@@ -24,11 +24,11 @@ const Page = React.forwardRef<HTMLDivElement, { children: React.ReactNode, numbe
     return (
         <div className="bg-[#fefae0] shadow-2xl overflow-hidden relative" ref={ref}>
             <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/handmade-paper.png')] opacity-20 pointer-events-none"></div>
-            <div className="h-full flex flex-col p-4 sm:p-6 md:p-8 lg:p-12 relative z-10">
+            <div className="h-full flex flex-col p-3 sm:p-5 md:p-7 lg:p-10 relative z-10">
                 <div className="flex-1 text-slate-800 font-serif leading-relaxed overflow-y-auto">
                     {props.children}
                 </div>
-                <div className="mt-2 sm:mt-4 text-center text-slate-400 text-[10px] sm:text-xs font-bold font-sans shrink-0">
+                <div className="mt-2 sm:mt-3 text-center text-slate-400 text-[10px] sm:text-xs font-bold font-sans shrink-0">
                     PÁGINA {props.number}
                 </div>
             </div>
@@ -47,19 +47,23 @@ export default function ReaderPage({ params }: { params: Promise<{ id: string }>
     const [isLoading, setIsLoading] = useState(true);
     const [book, setBook] = useState<Book | null>(null);
     const [flipSize, setFlipSize] = useState({ width: 500, height: 700 });
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
         function calcSize() {
             const vh = window.innerHeight;
             const vw = window.innerWidth;
-            const headerH = 64;
-            const footerH = 80;
-            const padding = vw < 640 ? 16 : vw < 1024 ? 40 : 80;
-            const availableH = vh - headerH - footerH - padding;
-            const availableW = vw - padding;
+            const mobile = vw < 640;
+            setIsMobile(mobile);
+
+            const headerH = mobile ? 48 : 64;
+            const footerH = mobile ? 64 : 80;
+            const padding = mobile ? 24 : vw < 1024 ? 40 : 60;
+            const availableH = vh - headerH - footerH - padding * 2;
+            const availableW = vw - padding * 2;
 
             const aspect = 5 / 7;
-            let h = Math.min(availableH, 700);
+            let h = Math.min(availableH, mobile ? 500 : 650);
             let w = h * aspect;
 
             if (w > availableW) {
@@ -67,8 +71,8 @@ export default function ReaderPage({ params }: { params: Promise<{ id: string }>
                 h = w / aspect;
             }
 
-            w = Math.max(Math.floor(w), 280);
-            h = Math.max(Math.floor(h), 392);
+            w = Math.max(Math.floor(w), 260);
+            h = Math.max(Math.floor(h), 364);
 
             setFlipSize({ width: w, height: h });
         }
@@ -195,10 +199,11 @@ export default function ReaderPage({ params }: { params: Promise<{ id: string }>
                         width={flipSize.width}
                         height={flipSize.height}
                         size="stretch"
-                        minWidth={280}
-                        maxWidth={800}
-                        minHeight={392}
-                        maxHeight={1200}
+                        usePortrait={isMobile}
+                        minWidth={260}
+                        maxWidth={600}
+                        minHeight={364}
+                        maxHeight={800}
                         maxShadowOpacity={0.5}
                         showCover={true}
                         mobileScrollSupport={true}
@@ -212,19 +217,19 @@ export default function ReaderPage({ params }: { params: Promise<{ id: string }>
                         {/* Capa do Livro */}
                         <div className="bg-[#fefae0] shadow-2xl overflow-hidden relative" p-cover="true">
                             <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/handmade-paper.png')] opacity-20 pointer-events-none"></div>
-                            <div className="h-full flex flex-col items-center justify-center p-6 sm:p-8 md:p-12 relative z-10">
+                            <div className="h-full flex flex-col items-center justify-center p-4 sm:p-6 md:p-10 relative z-10">
                                 {book?.coverImageUrl ? (
-                                    <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl mb-6 sm:mb-8 border-4 border-white/20">
+                                    <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl mb-4 sm:mb-6 border-4 border-white/20">
                                         <img src={book.coverImageUrl} alt={book.title} className="w-full h-full object-cover" />
                                     </div>
                                 ) : (
-                                    <div className={`w-24 sm:w-32 h-24 sm:h-32 bg-gradient-to-tr ${book?.color} rounded-3xl shadow-xl mb-6 sm:mb-8`}></div>
+                                    <div className={`w-20 sm:w-28 h-20 sm:h-28 bg-gradient-to-tr ${book?.color} rounded-3xl shadow-xl mb-4 sm:mb-6`}></div>
                                 )}
-                                <h1 className="text-2xl sm:text-3xl md:text-4xl font-serif font-black text-center text-slate-900 leading-tight mb-3 sm:mb-4">
+                                <h1 className="text-xl sm:text-2xl md:text-3xl font-serif font-black text-center text-slate-900 leading-tight mb-2 sm:mb-3">
                                     {book?.title}
                                 </h1>
-                                <div className="h-1 w-16 sm:w-20 bg-blue-500 rounded-full"></div>
-                                <p className="mt-6 sm:mt-8 text-slate-500 font-bold uppercase tracking-widest text-[10px] sm:text-xs">
+                                <div className="h-1 w-14 sm:w-18 bg-blue-500 rounded-full"></div>
+                                <p className="mt-4 sm:mt-6 text-slate-500 font-bold uppercase tracking-widest text-[10px] sm:text-xs">
                                     {book?.category}
                                 </p>
                             </div>
@@ -239,15 +244,15 @@ export default function ReaderPage({ params }: { params: Promise<{ id: string }>
                                         <p className="text-slate-400 font-bold italic">Conteúdo Bloqueado</p>
                                     </div>
                                 ) : (
-                                    <div className="space-y-4 sm:space-y-6">
+                                    <div className="space-y-3 sm:space-y-5">
                                         {page.title && (
-                                            <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 sm:mb-6 text-blue-800">
+                                            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-5 text-blue-800">
                                                 {page.title}
                                             </h3>
                                         )}
                                         
                                         {page.imageUrl && (
-                                            <div className="relative w-full h-40 sm:h-48 md:h-64 rounded-2xl overflow-hidden shadow-md border border-slate-200 group">
+                                            <div className="relative w-full h-36 sm:h-44 md:h-56 rounded-2xl overflow-hidden shadow-md border border-slate-200 group">
                                                 <img 
                                                     src={page.imageUrl} 
                                                     alt={page.imageAlt || "Ilustração"} 
@@ -257,7 +262,7 @@ export default function ReaderPage({ params }: { params: Promise<{ id: string }>
                                         )}
 
                                         {page.text?.map((paragraph, pIdx) => (
-                                            <p key={pIdx} className="text-sm sm:text-base text-slate-700">
+                                            <p key={pIdx} className="text-base sm:text-lg md:text-xl text-slate-700 leading-relaxed">
                                                 {paragraph}
                                             </p>
                                         ))}

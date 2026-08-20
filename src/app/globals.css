@@ -51,3 +51,14 @@ h4 {
         radial-gradient(at 90% 10%, hsla(271, 100%, 15%, 1) 0px, transparent 50%),
         radial-gradient(at 50% 50%, hsla(258, 100%, 5%, 1) 0px, transparent 50%);
 }
+
+.stf__parent {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    margin: 0 auto;
+}
+
+.stf__wrapper {
+    max-width: 100% !important;
+    overflow: visible;
+}
