@@ -4,6 +4,9 @@ import "./globals.css";
 export const metadata: Metadata = {
     title: "InfantilBooksLux - Histórias Mágicas",
     description: "A melhor plataforma de ebooks infantis com design premium.",
+    icons: {
+        icon: "/logo.svg",
+    },
 };
 
 export default function RootLayout({
