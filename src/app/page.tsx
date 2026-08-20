@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
     BookOpen,
     ShoppingCart,
@@ -12,7 +12,9 @@ import {
     ChevronLeft,
     CheckCircle2,
     Sparkles,
-    Zap
+    Zap,
+    Play,
+    X
 } from "lucide-react";
 import Link from "next/link";
 import { createCheckoutSession } from "@/app/auth/stripe-action";
@@ -77,6 +79,23 @@ const landingBooks = myBooks.map(book => {
 export default function Home() {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isDarkMode, setIsDarkMode] = useState(true);
+    const [showVideo, setShowVideo] = useState(false);
+
+    const closeVideo = useCallback(() => setShowVideo(false), []);
+
+    useEffect(() => {
+        const handleEsc = (e: KeyboardEvent) => {
+            if (e.key === "Escape") closeVideo();
+        };
+        if (showVideo) {
+            document.addEventListener("keydown", handleEsc);
+            document.body.style.overflow = "hidden";
+        }
+        return () => {
+            document.removeEventListener("keydown", handleEsc);
+            document.body.style.overflow = "";
+        };
+    }, [showVideo, closeVideo]);
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -160,11 +179,10 @@ export default function Home() {
                             </div>
                             <div className="flex items-center gap-4 text-sm font-medium text-slate-500 dark:text-slate-400">
                                 <div className="flex -space-x-2">
-                                    {[1, 2, 3, 4].map(i => (
-                                        <div key={i} className="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900 bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-[10px] text-slate-500">
-                                            U{i}
-                                        </div>
-                                    ))}
+                                    <img src="https://i.pravatar.cc/100?img=32" alt="Usuário" className="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900 object-cover" />
+                                    <img src="https://i.pravatar.cc/100?img=47" alt="Usuário" className="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900 object-cover" />
+                                    <img src="https://i.pravatar.cc/100?img=12" alt="Usuário" className="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900 object-cover" />
+                                    <img src="https://i.pravatar.cc/100?img=5" alt="Usuário" className="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900 object-cover" />
                                 </div>
                                 <span>+5.000 pais já assinaram</span>
                             </div>
@@ -217,6 +235,80 @@ export default function Home() {
                         </div>
                     </div>
                 </section>
+
+                {/* Como Funciona Section */}
+                <section className="py-24 px-6">
+                    <div className="max-w-4xl mx-auto text-center space-y-8">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 text-purple-500 text-sm font-bold border border-purple-500/20">
+                            <Sparkles className="w-4 h-4" /> Simples e Rápido
+                        </div>
+                        <h3 className="text-4xl md:text-5xl font-black dark:text-white">Como <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 font-black">Funciona?</span></h3>
+                        <p className="text-slate-500 dark:text-slate-400 text-lg max-w-2xl mx-auto">
+                            Em apenas 3 passos simples, seu filho começa a explorar mundos mágicos com nossos ebooks interativos.
+                        </p>
+
+                        <div className="relative mt-12 group cursor-pointer" onClick={() => setShowVideo(true)}>
+                            <div className="absolute -inset-4 bg-gradient-to-r from-purple-500 to-pink-600 rounded-[40px] blur-2xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                            <div className="relative bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 rounded-[32px] overflow-hidden aspect-video flex items-center justify-center border border-slate-200 dark:border-slate-700">
+                                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-pink-600/20"></div>
+                                <div className="relative z-10 flex flex-col items-center gap-6">
+                                    <div className="w-20 h-20 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center shadow-2xl shadow-purple-500/30 group-hover:scale-110 transition-transform duration-300">
+                                        <Play className="w-8 h-8 text-white ml-1" fill="white" />
+                                    </div>
+                                    <p className="text-slate-600 dark:text-slate-300 font-bold text-lg">Assista ao vídeo explicativo</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="grid md:grid-cols-3 gap-8 mt-16">
+                            <div className="flex flex-col items-center gap-4 p-6">
+                                <div className="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center">
+                                    <span className="text-2xl font-black text-blue-500">1</span>
+                                </div>
+                                <h4 className="text-lg font-bold dark:text-white">Escolha seu Ebook</h4>
+                                <p className="text-slate-500 dark:text-slate-400 text-sm text-center">Navegue pela nossa coleção e escolha a história perfeita para o seu filho.</p>
+                            </div>
+                            <div className="flex flex-col items-center gap-4 p-6">
+                                <div className="w-14 h-14 rounded-2xl bg-purple-500/10 flex items-center justify-center">
+                                    <span className="text-2xl font-black text-purple-500">2</span>
+                                </div>
+                                <h4 className="text-lg font-bold dark:text-white">Compre com Segurança</h4>
+                                <p className="text-slate-500 dark:text-slate-400 text-sm text-center">Pagamento 100% seguro via Stripe. Acesso instantâneo após a compra.</p>
+                            </div>
+                            <div className="flex flex-col items-center gap-4 p-6">
+                                <div className="w-14 h-14 rounded-2xl bg-pink-500/10 flex items-center justify-center">
+                                    <span className="text-2xl font-black text-pink-500">3</span>
+                                </div>
+                                <h4 className="text-lg font-bold dark:text-white">Leia e Aprenda</h4>
+                                <p className="text-slate-500 dark:text-slate-400 text-sm text-center">Acesse pelo celular, tablet ou computador. Leve as histórias para qualquer lugar.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Video Modal */}
+                {showVideo && (
+                    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4" onClick={closeVideo}>
+                        <div className="relative w-full max-w-4xl" onClick={(e) => e.stopPropagation()}>
+                            <button
+                                onClick={closeVideo}
+                                className="absolute -top-12 right-0 text-white/70 hover:text-white transition-colors"
+                                aria-label="Fechar vídeo"
+                            >
+                                <X className="w-8 h-8" />
+                            </button>
+                            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl">
+                                <iframe
+                                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
+                                    title="Como funciona - InfantilBooksLux"
+                                    className="absolute inset-0 w-full h-full"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                />
+                            </div>
+                        </div>
+                    </div>
+                )}
 
                 {/* Pricing Section */}
                 <section className="py-24 px-6 max-w-7xl mx-auto">
