@@ -6,11 +6,10 @@ import {
     Lock,
     ArrowRight,
     Sparkles,
-    Github,
     Chrome
 } from "lucide-react";
 import Link from "next/link";
-import { login } from "@/app/auth/actions";
+import { login, signInWithGoogle } from "@/app/auth/actions";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
@@ -103,13 +102,15 @@ function LoginContent() {
                         <div className="h-px bg-white/10 flex-1"></div>
                     </div>
 
-                    <div className="mt-8 grid grid-cols-2 gap-4">
-                        <button className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all font-medium text-sm">
-                            <Chrome className="w-5 h-5" /> Google
-                        </button>
-                        <button className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all font-medium text-sm">
-                            <Github className="w-5 h-5" /> GitHub
-                        </button>
+                    <div className="mt-8">
+                        <form action={signInWithGoogle}>
+                            <button
+                                type="submit"
+                                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all font-medium text-sm"
+                            >
+                                <Chrome className="w-5 h-5" /> Entrar com Google
+                            </button>
+                        </form>
                     </div>
                 </div>
 

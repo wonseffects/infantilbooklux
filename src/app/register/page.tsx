@@ -7,10 +7,11 @@ import {
     Lock,
     ArrowRight,
     Sparkles,
-    CheckCircle2
+    CheckCircle2,
+    Chrome
 } from "lucide-react";
 import Link from "next/link";
-import { signup } from "@/app/auth/actions";
+import { signup, signInWithGoogle } from "@/app/auth/actions";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
@@ -108,6 +109,23 @@ function RegisterContent() {
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </button>
                     </form>
+
+                    <div className="mt-8 flex items-center justify-between gap-4">
+                        <div className="h-px bg-white/10 flex-1"></div>
+                        <span className="text-xs text-slate-500 font-medium">OU CADASTRE-SE COM</span>
+                        <div className="h-px bg-white/10 flex-1"></div>
+                    </div>
+
+                    <div className="mt-8">
+                        <form action={signInWithGoogle}>
+                            <button
+                                type="submit"
+                                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all font-medium text-sm"
+                            >
+                                <Chrome className="w-5 h-5" /> Cadastrar com Google
+                            </button>
+                        </form>
+                    </div>
                 </div>
 
                 <p className="text-center mt-8 text-slate-400">
